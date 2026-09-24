@@ -25,7 +25,7 @@ behavior depends on managed infrastructure. The final go-live review audits all
 |---|---|---|
 | PostgreSQL + Prisma foundation | PostgreSQL 17 Compose/CI service, immutable migrations, Prisma schema, RLS/native constraints, migration runbook | Staging cutover rehearsal, backup/restore and managed-database evidence |
 | Runtime architecture | pnpm workspace, NestJS/Fastify API, Next.js BFF, strict configuration, RFC 7807 errors, committed deterministic OpenAPI v1 artifact | Generated frontend clients and full domain dependency enforcement |
-| Production initialization | No seed path; audited idempotent the superadmin bootstrap; forced password change, verification and MFA | Managed-secret/bootstrap ceremony in staging and automatic credential removal evidence |
+| Production initialization | No seed path; audited idempotent superadmin bootstrap; forced password change, verification and MFA | Managed-secret/bootstrap ceremony in staging and automatic credential removal evidence |
 | Identity security | HttpOnly BFF cookies, exact-origin mutation enforcement, rotated hashed refresh tokens, family reuse revocation, verification/reset delivery, throttling | Session inventory and broader privileged step-up coverage |
 | Booking integrity | Server availability, immutable buffers and policy snapshots, database transition guard, lead/horizon/notice enforcement, local slot intervals, location locks, exclusions, expiring holds, encrypted idempotent replay, emailed tracking verification | Property-based scheduling tests and resource-capacity policy |
 | Public UX | Explicit location, real timezone-correct availability, DST overlap labels, hold recovery, nonce confirmation, safe-body verified tracking, differentiated failures | Accessible end-to-end audit and calendar invitations |
@@ -52,7 +52,8 @@ PostgreSQL row-level security (RLS), exclusion constraints, and native indexes
 will complement Prisma wherever the ORM cannot express a production invariant.
 
 Production contains no seed users or demo businesses. The first superadmin is
-created by an audited, idempotent, one-time bootstrap command. It accepts the superadmin and `superadmin@example.com`, reads the initial credential from a secret
+created by an audited, idempotent, one-time bootstrap command. It accepts a single
+superadmin identity supplied through environment variables, reads the initial credential from a secret
 manager or protected prompt, requires email verification, MFA enrollment, and a
 password change, and never stores the credential in Git, migrations, images, or
 logs.
@@ -126,7 +127,7 @@ maturity immediately after the first controlled release.
 41. **P0** Delete demo seed execution from all runtime and deployment paths.
 42. **P0** Remove documented demo passwords and known secret defaults.
 43. **P0** Create an idempotent one-time superadmin bootstrap command.
-44. **P0** Bootstrap the superadmin using `superadmin@example.com` only from protected input.
+44. **P0** Bootstrap the configured superadmin identity only from protected input.
 45. **P0** Require verified email before superadmin access.
 46. **P0** Require MFA enrollment during first superadmin session.
 47. **P0** Require an immediate initial password change.

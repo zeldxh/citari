@@ -24,7 +24,7 @@ opaque token in the URL fragment so it is not sent in HTTP request targets.
 
 ## First superadmin access
 
-The one-time bootstrap creates only the superadmin at `superadmin@example.com`. It
+The one-time bootstrap creates only the superadmin identity supplied through environment variables. It
 marks the email verified, requires a password change, requires MFA, creates no
 tenant, and accepts the temporary password through standard input.
 
