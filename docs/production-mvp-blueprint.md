@@ -1,6 +1,6 @@
 # Citari production MVP blueprint
 
-Status: active execution — not approved for production
+Status: active execution, not approved for production
 Owner: `zeldxh`
 Target: production-ready multi-tenant booking platform  
 Last evidence audit: 2026-09-03
@@ -235,7 +235,7 @@ maturity immediately after the first controlled release.
 126. **P1** Define loading, refreshing, empty, error, offline, forbidden, and success states.
 127. **P1** Make tables semantic, sortable, captioned, and responsive.
 128. **P1** Guarantee 44px touch targets and non-hover access to every action.
-129. **P1** Support reduced motion, 200–400% zoom, and high contrast.
+129. **P1** Support reduced motion, 200% to 400% zoom, and high contrast.
 130. **P1** Document components and interaction states in Storybook.
 
 ### 14. Frontend architecture

@@ -8,7 +8,7 @@ performance, rollback, and restore evidence has passed in staging.
 
 - Prisma migrations are immutable after merge.
 - Production deploys run `prisma migrate deploy`; never `db push`.
-- Migrations contain schema and technical reference values only—no tenants,
+- Migrations contain schema and technical reference values only, with no tenants,
   bookings, customers, users, or demo data.
 - Every tenant-owned table is protected by PostgreSQL row-level security and
   tested with a non-owner runtime role.
