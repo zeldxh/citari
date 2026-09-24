@@ -1,7 +1,7 @@
 # Citari
 
 Production-oriented, multi-tenant appointment/booking platform. A pnpm monorepo with two workspace
-apps — a NestJS/Fastify API and a Next.js frontend — backed by PostgreSQL 17 via Prisma.
+apps (a NestJS/Fastify API and a Next.js frontend) backed by PostgreSQL 17 via Prisma.
 
 ## Stack
 
@@ -33,7 +33,7 @@ Recommended (Docker):
 docker compose up --build
 ```
 
-Brings up PostgreSQL, the API, and the frontend. No demo records are created — bootstrap the
+Brings up PostgreSQL, the API, and the frontend. No demo records are created, so bootstrap the
 first superadmin explicitly (see below). Frontend at `http://localhost:3000`.
 
 Without Docker, on the host:
@@ -48,7 +48,7 @@ pnpm dev                 # runs api + frontend in parallel
 ```
 
 Copy `.env.example` to `.env` first and replace every `REPLACE_...` value. The database starts
-empty by design — the superadmin bootstrap is a deployment operation, not a seed:
+empty by design: the superadmin bootstrap is a deployment operation, not a seed:
 
 ```bash
 pnpm admin:bootstrap
@@ -72,13 +72,13 @@ pnpm test:e2e   # Playwright end-to-end tests
 
 ## Docs
 
-- [`docs/adr/0001-postgresql-prisma-api.md`](docs/adr/0001-postgresql-prisma-api.md) — architecture decision record
-- [`docs/development.md`](docs/development.md) — local development setup
-- [`docs/deployment.md`](docs/deployment.md) — production deployment, images, required runtime config
-- [`docs/postgresql-migration-runbook.md`](docs/postgresql-migration-runbook.md) — migration runbook
-- [`docs/security.md`](docs/security.md) — security model
-- [`docs/qa.md`](docs/qa.md) — QA/testing approach
-- [`docs/production-mvp-blueprint.md`](docs/production-mvp-blueprint.md) — delivery blueprint
+- [`docs/adr/0001-postgresql-prisma-api.md`](docs/adr/0001-postgresql-prisma-api.md): architecture decision record
+- [`docs/development.md`](docs/development.md): local development setup
+- [`docs/deployment.md`](docs/deployment.md): production deployment, images, required runtime config
+- [`docs/postgresql-migration-runbook.md`](docs/postgresql-migration-runbook.md): migration runbook
+- [`docs/security.md`](docs/security.md): security model
+- [`docs/qa.md`](docs/qa.md): QA/testing approach
+- [`docs/production-mvp-blueprint.md`](docs/production-mvp-blueprint.md): delivery blueprint
 
 ## License
 
