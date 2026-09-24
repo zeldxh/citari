@@ -55,6 +55,9 @@ jobs:
       APP_PUBLIC_URL: https://ci.citari.test
       MAIL_TRANSPORT: disabled
       E2E_SUPERADMIN_PASSWORD: CiTemporaryPassword2026A
+      BOOTSTRAP_SUPERADMIN_EMAIL: superadmin@example.com
+      BOOTSTRAP_SUPERADMIN_FIRST_NAME: Super
+      BOOTSTRAP_SUPERADMIN_LAST_NAME: Admin
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

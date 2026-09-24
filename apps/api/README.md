@@ -22,5 +22,7 @@ secret provider into:
 pnpm admin:bootstrap
 ```
 
-The command creates only the superadmin (`superadmin@example.com`), is idempotent,
+The command creates only the superadmin identity supplied through
+`BOOTSTRAP_SUPERADMIN_EMAIL`, `BOOTSTRAP_SUPERADMIN_FIRST_NAME` and
+`BOOTSTRAP_SUPERADMIN_LAST_NAME`, is idempotent,
 and requires password change and MFA enrollment. It creates no tenant or demo data.

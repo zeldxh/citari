@@ -41,6 +41,8 @@ function status(response: Response, expected: number): Response {
 async function main(): Promise<void> {
   const superadminPassword = process.env.E2E_SUPERADMIN_PASSWORD;
   if (!superadminPassword) throw new Error("E2E_SUPERADMIN_PASSWORD is required");
+  const superadminEmail = process.env.BOOTSTRAP_SUPERADMIN_EMAIL;
+  if (!superadminEmail) throw new Error("BOOTSTRAP_SUPERADMIN_EMAIL is required");
   const notificationKey = process.env.NOTIFICATION_ENCRYPTION_KEY;
   if (!notificationKey) throw new Error("NOTIFICATION_ENCRYPTION_KEY is required");
 
@@ -69,7 +71,7 @@ async function main(): Promise<void> {
       status(await http.post("/api/v1/auth/email/verify").send({ challengeToken: payload.token }), 401);
     }
 
-    const passwordChallenge = challengeSchema.parse(status(await http.post("/api/v1/auth/login").send({ email: "superadmin@example.com", password: superadminPassword }), 200).body);
+    const passwordChallenge = challengeSchema.parse(status(await http.post("/api/v1/auth/login").send({ email: superadminEmail, password: superadminPassword }), 200).body);
     assert.equal(passwordChallenge.status, "PASSWORD_CHANGE_REQUIRED");
     const permanentPassword = "CiPermanentPassword2026B";
     const mfaChallenge = challengeSchema.parse(status(await http.post("/api/v1/auth/password/change-initial").send({ challengeToken: passwordChallenge.challengeToken, newPassword: permanentPassword }), 200).body);
@@ -79,7 +81,7 @@ async function main(): Promise<void> {
     assert.match(enrollment.otpAuthUri, /^otpauth:\/\/totp\//);
     const mfaCode = totpAt(enrollment.secret, Math.floor(Date.now() / 30_000));
     const adminLogin = tokensSchema.parse(status(await http.post("/api/v1/auth/mfa/confirm").send({ challengeToken: enrollment.challengeToken, code: mfaCode }), 200).body);
-    status(await http.post("/api/v1/auth/login").send({ email: "superadmin@example.com", password: permanentPassword, mfaCode }), 401);
+    status(await http.post("/api/v1/auth/login").send({ email: superadminEmail, password: permanentPassword, mfaCode }), 401);
     const adminAuthorization = `Bearer ${adminLogin.accessToken}`;
     for (const tenantId of [firstRegistration.tenantId, secondRegistration.tenantId]) {
       status(await http
